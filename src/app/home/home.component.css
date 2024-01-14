@@ -1,0 +1,14 @@
+.user-details-box {
+    border: 5px solid #ccc; /* Border style for the box */
+    padding: 10px; /* Padding to create some space around the content */
+    margin-top: 10px; /* Margin to add space between user items */
+  }
+  
+  .user-details {
+    margin-bottom: 10px; /* Margin to add space between details and button */
+  }
+  
+  .send-message-btn {
+    /* You can add additional styling for the "Send message" button */
+  }
+  

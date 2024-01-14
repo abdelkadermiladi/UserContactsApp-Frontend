@@ -1,6 +1,27 @@
 <div>
-    <h2>Welcome {{ username }}!</h2>
-    <p>Gender: {{ gender }}</p>
-    <p>Age: {{ age }}</p>
-  </div>
-  
+  <h2>Welcome {{ username }}!</h2>
+  <p>Gender: {{ gender }}</p>
+  <p>Age: {{ age }}</p>
+  <button (click)="logout()">Logout</button>
+</div>
+<br>
+********************************************
+<br><br><br><br>
+<h3>Other User Names:</h3>
+<ul>
+  <li *ngFor="let otherUserName of otherUsersNames">
+    {{ otherUserName }}
+    <button (click)="viewUserProfile(otherUserName)">View Profile</button>
+    <div *ngIf="selectedUser && selectedUser.username === otherUserName" class="user-details-box">
+      <!-- Display details for the selected user -->
+      <div class="user-details">
+        <p>Gender: {{ selectedUser.gender }}</p>
+        <p>Age: {{ selectedUser.age }}</p>
+        <!-- Add other details as needed -->
+      </div>
+      <button class="send-message-btn">Send message</button>
+    </div>
+    <br>
+  </li>
+</ul>
+
