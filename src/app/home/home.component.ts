@@ -12,6 +12,8 @@ export class HomeComponent implements OnInit {
   username: string = '';
   gender: string = '';
   age: number = 0;
+  phoneNumber: number = 0;
+  email: string = '';
   otherUsersNames: string[] = [];
   selectedUser: User | null = null;
 
@@ -25,6 +27,8 @@ export class HomeComponent implements OnInit {
       userDetails => {
         this.gender = userDetails.gender;
         this.age = userDetails.age;
+        this.phoneNumber = userDetails.phoneNumber;
+        this.email = userDetails.email;
       },
       error => {
         console.error('Failed to fetch user details', error);

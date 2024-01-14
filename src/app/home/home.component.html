@@ -2,8 +2,11 @@
   <h2>Welcome {{ username }}!</h2>
   <p>Gender: {{ gender }}</p>
   <p>Age: {{ age }}</p>
+  <p>Phone Number: {{ phoneNumber }}</p>
+  <p>Email: {{ email }}</p>
   <button (click)="logout()">Logout</button>
 </div>
+
 <br>
 ********************************************
 <br><br><br><br>
@@ -17,6 +20,9 @@
       <div class="user-details">
         <p>Gender: {{ selectedUser.gender }}</p>
         <p>Age: {{ selectedUser.age }}</p>
+        <p>phoneNumber: {{ selectedUser.phoneNumber }}</p>
+        <p>email: {{ selectedUser.email }}</p>
+
         <!-- Add other details as needed -->
       </div>
       <button class="send-message-btn">Send message</button>
