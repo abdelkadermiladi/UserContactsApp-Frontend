@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   email: string = '';
   otherUsersNames: string[] = [];
   selectedUser: User | null = null;
+  newContact: { contactname: string, email: string, phoneNumber: number } = { contactname: '', email: '', phoneNumber: 0 };
 
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) {}
 
@@ -48,6 +49,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
+
   logout(): void {
     this.router.navigate(['/login']);
   }
@@ -60,6 +62,19 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.error('Failed to fetch user details', error);
+      }
+    );
+  }
+
+
+
+  onAddContact(): void {
+    this.userService.addContact(this.newContact).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.error('Erreur lors de l\'ajout du contact', error);
       }
     );
   }

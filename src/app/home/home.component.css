@@ -8,7 +8,20 @@
     margin-bottom: 10px; /* Margin to add space between details and button */
   }
   
-  .send-mail-btn {
-    /* You can add additional styling for the "Send message" button */
+  .user-details-box {
+    border: 5px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex; /* Use flexbox to align items horizontally */
+  }
+  
+  .user-details {
+    margin-bottom: 10px;
+  }
+  
+  .add-contact-form {
+    border: 2px solid #aaa;
+    padding: 10px;
+    margin-left: 10px; /* Adjust the margin as needed */
   }
   

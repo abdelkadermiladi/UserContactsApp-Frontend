@@ -8,8 +8,24 @@
 </div>
 
 <br>
-********************************************
-<br><br><br><br>
+<!-- Formulaire pour ajouter un contact -->
+<div class="add-contact-form">
+  <h3>Ajouter un contact</h3>
+  <form (ngSubmit)="onAddContact()" #addContactForm="ngForm">
+    <label for="contactname">Nom du contact:</label>
+    <input type="text" id="contactname" [(ngModel)]="newContact.contactname" name="contactname" required />
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" [(ngModel)]="newContact.email" name="email" required />
+
+    <label for="phoneNumber">Numéro de téléphone:</label>
+    <input type="int" id="phoneNumber" [(ngModel)]="newContact.phoneNumber" name="phoneNumber" required />
+
+    <button type="submit">Ajouter un contact</button>
+  </form>
+</div>
+<br>
+
 <h3>Other User Names:</h3>
 <ul>
   <li *ngFor="let otherUserName of otherUsersNames">
@@ -22,12 +38,8 @@
         <p>Age: {{ selectedUser.age }}</p>
         <p>phoneNumber: {{ selectedUser.phoneNumber }}</p>
         <p>email: {{ selectedUser.email }}</p>
-
-        <!-- Add other details as needed -->
       </div>
-      <button class="send-mail-btn">Send mail</button>
     </div>
     <br>
   </li>
 </ul>
-
