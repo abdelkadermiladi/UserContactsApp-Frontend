@@ -30,4 +30,12 @@ export class UserService {
   listContacts(): Observable<Contact[]> {
     return this.http.get<Contact[]>(`${this.apiUrl}/list-contacts`);
   }
+
+
+  removeContact(contact: Contact): Observable<any> {
+    const url = `${this.apiUrl}/remove-contact/${contact.contactname}`;
+    return this.http.delete(url);
+  }
+  
+
 }

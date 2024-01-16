@@ -99,4 +99,23 @@ export class HomeComponent implements OnInit {
   clearErrorMessage(): void {
     this.errorMessage = '';
   }
+
+  removeContact(contact: Contact): void {
+    this.userService.removeContact(contact).subscribe(
+      response => {
+        if (response && response.message === 'Contact removed successfully') {
+          console.log(response.message);
+          // Mettez à jour la liste des contacts après la suppression réussie
+          this.contacts = this.contacts.filter(c => c !== contact);
+        } else {
+          console.error('Erreur inattendue lors de la suppression du contact');
+        }
+      },
+      error => {
+        console.error('Erreur lors de la suppression du contact', error);
+      }
+    );
+  }
+  
+  
 }
