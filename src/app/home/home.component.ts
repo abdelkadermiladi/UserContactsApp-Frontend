@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { User } from '../../../model.user';
+import { Contact } from '../../../model.contact';
+
 
 @Component({
   selector: 'app-home',
@@ -17,6 +19,7 @@ export class HomeComponent implements OnInit {
   otherUsersNames: string[] = [];
   selectedUser: User | null = null;
   newContact: { contactname: string, email: string, phoneNumber: number } = { contactname: '', email: '', phoneNumber: 0 };
+  contacts: Contact[] = [];
 
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) {}
 
@@ -47,6 +50,16 @@ export class HomeComponent implements OnInit {
         console.error('Failed to fetch other user names', error);
       }
     );
+
+    this.userService.listContacts().subscribe(
+      (contacts) => {
+        this.contacts = contacts;
+      },
+      (error) => {
+        console.error('Failed to fetch contacts', error);
+      }
+    );
+
   }
 
 
@@ -67,15 +80,23 @@ export class HomeComponent implements OnInit {
   }
 
 
-
   onAddContact(): void {
     this.userService.addContact(this.newContact).subscribe(
       response => {
         console.log(response);
+        // Rafraîchir la liste des utilisateurs ou effectuer d'autres actions nécessaires
       },
       error => {
         console.error('Erreur lors de l\'ajout du contact', error);
+        if (error.status === 400 && error.error && error.error.error === 'Contact already exists') {
+          this.errorMessage = 'Ce contact existe déjà';
+        }
       }
     );
+  }
+
+  errorMessage: string = '';
+  clearErrorMessage(): void {
+    this.errorMessage = '';
   }
 }

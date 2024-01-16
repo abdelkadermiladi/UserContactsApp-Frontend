@@ -6,6 +6,7 @@
   <p>Email: {{ email }}</p>
   <button (click)="logout()">Logout</button>
 </div>
+-----------------------------------------------------------------------------------------------
 
 <br>
 <!-- Formulaire pour ajouter un contact -->
@@ -22,9 +23,30 @@
     <input type="int" id="phoneNumber" [(ngModel)]="newContact.phoneNumber" name="phoneNumber" required />
 
     <button type="submit">Ajouter un contact</button>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+      <button (click)="clearErrorMessage()">Fermer</button>
+    </div>
+    
   </form>
 </div>
 <br>
+
+-----------------------------------------------------------------------------------------------
+<div *ngIf="contacts && contacts.length > 0">
+  <h3>Liste des Contacts</h3>
+  <ul>
+    <li *ngFor="let contact of contacts">
+      {{ contact.contactname }} - {{ contact.email }} - {{ contact.phoneNumber }}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="contacts && contacts.length === 0">
+  <p>Votre liste des contacts est vide!</p>
+</div>
+-----------------------------------------------------------------------------------------------
 
 <h3>Other User Names:</h3>
 <ul>
@@ -43,3 +65,6 @@
     <br>
   </li>
 </ul>
+-----------------------------------------------------------------------------------------------
+
+

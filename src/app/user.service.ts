@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { User } from '../../model.user';
+import { Contact } from '../../model.contact';
 //import { Contact } from '../../model.contact';
 
 @Injectable({
@@ -24,5 +25,9 @@ export class UserService {
 
   addContact(contact: { contactname: string, email: string, phoneNumber: number }): Observable<any> {
     return this.http.post(`${this.apiUrl}/add-contact`, contact);
+  }
+
+  listContacts(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(`${this.apiUrl}/list-contacts`);
   }
 }
