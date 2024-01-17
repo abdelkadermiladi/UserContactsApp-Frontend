@@ -3,12 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { User } from '../../../model.user';
 import { Contact } from '../../../model.contact';
+import { MatDialog } from '@angular/material/dialog';
+import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']  
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   username: string = '';
@@ -21,7 +23,7 @@ export class HomeComponent implements OnInit {
   newContact: { contactname: string, email: string, phoneNumber: number } = { contactname: '', email: '', phoneNumber: 0 };
   contacts: Contact[] = [];
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router,public dialog: MatDialog) {}
 
   ngOnInit(): void {
     // Fetch user information from the backend based on the username
@@ -80,26 +82,6 @@ export class HomeComponent implements OnInit {
   }
 
 
-  onAddContact(): void {
-    this.userService.addContact(this.newContact).subscribe(
-      response => {
-        console.log(response);
-        // Rafraîchir la liste des utilisateurs ou effectuer d'autres actions nécessaires
-      },
-      error => {
-        console.error('Erreur lors de l\'ajout du contact', error);
-        if (error.status === 400 && error.error && error.error.error === 'Contact already exists') {
-          this.errorMessage = 'Ce contact existe déjà';
-        }
-      }
-    );
-  }
-
-  errorMessage: string = '';
-  clearErrorMessage(): void {
-    this.errorMessage = '';
-  }
-
   removeContact(contact: Contact): void {
     this.userService.removeContact(contact).subscribe(
       response => {
@@ -115,6 +97,18 @@ export class HomeComponent implements OnInit {
         console.error('Erreur lors de la suppression du contact', error);
       }
     );
+  }
+
+
+  openAddContactDialog(): void {
+    const dialogRef = this.dialog.open(AddContactDialogComponent, {
+      width: '400px',
+      // Ajoutez d'autres configurations de dialogue si nécessaire
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
   }
   
   

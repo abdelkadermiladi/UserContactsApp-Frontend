@@ -1,0 +1,30 @@
+<!-- Formulaire pour ajouter un contact -->
+<div class="add-contact-form">
+  <form (ngSubmit)="onAddContact()" #addContactForm="ngForm">
+    <div class="form-group">
+      <label for="contactname">Nom du contact:</label>
+      <input type="text" id="contactname" [(ngModel)]="newContact.contactname" name="contactname" required pattern="[a-zA-Z\s]*" minlength="3" />
+      <div *ngIf="addContactForm.controls['contactname'].hasError('required') || (addContactForm.controls['contactname'].hasError('pattern') && addContactForm.controls['contactname'].touched)">
+        <span class="error-message-con">Le nom du contact doit avoir au moins 3 caractères et ne peut pas être vide.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" [(ngModel)]="newContact.email" name="email" required />
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Numéro de téléphone:</label>
+      <input type="tel" id="phoneNumber" [(ngModel)]="newContact.phoneNumber" name="phoneNumber" required pattern="[0-9]{8}" />
+      <div *ngIf="addContactForm.controls['phoneNumber'].hasError('required') || (addContactForm.controls['phoneNumber'].hasError('pattern') && addContactForm.controls['phoneNumber'].touched)">
+        <span class="error-message-con">Le numéro de téléphone doit contenir exactement 8 chiffres et ne peut pas être vide.</span>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button type="submit">Confirmer</button>
+    </div>
+
+  </form>
+</div>

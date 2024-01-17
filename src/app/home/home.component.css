@@ -39,3 +39,16 @@
 .contacts-table th {
   background-color: #f2f2f2;
 }
+.add-contact-button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-contact-button .icon {
+  margin-right: 5px;
+  font-weight: bold;
+}

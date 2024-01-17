@@ -6,35 +6,14 @@
   <p>Email: {{ email }}</p>
   <button (click)="logout()">Logout</button>
 </div>
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-<br>
-<!-- Formulaire pour ajouter un contact -->
-<div class="add-contact-form">
-  <h3>Ajouter un contact</h3>
-  <form (ngSubmit)="onAddContact()" #addContactForm="ngForm">
-    <label for="contactname">Nom du contact:</label>
-    <input type="text" id="contactname" [(ngModel)]="newContact.contactname" name="contactname" required />
-
-    <label for="email">Email:</label>
-    <input type="text" id="email" [(ngModel)]="newContact.email" name="email" required />
-
-    <label for="phoneNumber">Numéro de téléphone:</label>
-    <input type="int" id="phoneNumber" [(ngModel)]="newContact.phoneNumber" name="phoneNumber" required />
-
-    <button type="submit">Ajouter un contact</button>
-
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-      <button (click)="clearErrorMessage()">Fermer</button>
-    </div>
-    
-  </form>
-</div>
-<br>
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-<h3>Liste des Contacts:</h3>
+<h3>Liste des Contacts:
+  <button class="add-contact-button" (click)="openAddContactDialog()">
+    <span class="icon">+</span> Nouveau contact
+  </button>
+</h3>
+
 <table *ngIf="contacts && contacts.length > 0" class="contacts-table">
   <thead>
     <tr>
