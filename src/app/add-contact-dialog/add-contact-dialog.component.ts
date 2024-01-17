@@ -49,4 +49,9 @@ export class AddContactDialogComponent {
       panelClass: [panelClass]
     });
   }
+
+
+  closeDialog(): void{
+    this.dialogRef.close();
+  }
 }

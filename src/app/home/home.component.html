@@ -1,26 +1,32 @@
-<div>
+<div class="user-info-container">
   <h2>Welcome {{ username }}!</h2>
   <p>Gender: {{ gender }}</p>
   <p>Age: {{ age }}</p>
   <p>Phone Number: {{ phoneNumber }}</p>
   <p>Email: {{ email }}</p>
-  <button (click)="logout()">Logout</button>
 </div>
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-<h3>Liste des Contacts:
-  <button class="add-contact-button" (click)="openAddContactDialog()">
-    <span class="icon">+</span> Nouveau contact
-  </button>
-</h3>
 
+<div class="logout-icon">
+  <button type="button" (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</div>
+
+
+<div class="contacts-container">
+<h2>Liste des Contacts:
+  <button class="add-contact-button" (click)="openAddContactDialog()" matTooltip="Nouveau contact">
+    <span class="icon"><mat-icon>person_add</mat-icon></span>
+  </button>
+</h2>
 <table *ngIf="contacts && contacts.length > 0" class="contacts-table">
   <thead>
     <tr>
       <th>Contact Name</th>
       <th>Email</th>
       <th>Phone Number</th>
-      <th>Action</th> <!-- Ajout de la colonne Action -->
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -29,15 +35,19 @@
       <td>{{ contact.email }}</td>
       <td>{{ contact.phoneNumber }}</td>
       <td>
-        <button (click)="removeContact(contact)">Remove Contact</button>
-        <!-- <button>Update Contact</button> -->
+        <button class="remove-contact-button" (click)="removeContact(contact)" matTooltip="Supprimer le contact">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button class="update-contact-button"  matTooltip="Modifier le contact">
+          <mat-icon>edit</mat-icon>
+        </button>
       </td>
     </tr>
   </tbody>
 </table>
-
 <div *ngIf="contacts && contacts.length === 0">
   <p>Votre liste des contacts est vide!</p>
+</div>
 </div>
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -61,3 +71,7 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+<mat-icon>add</mat-icon>
+<mat-icon>edit</mat-icon>
+
+<mat-icon>delete</mat-icon>

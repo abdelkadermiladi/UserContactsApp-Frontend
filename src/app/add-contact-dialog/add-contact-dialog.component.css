@@ -46,6 +46,9 @@
   .button-container {
     text-align: center; /* Centrer le bouton à l'intérieur du conteneur */
   }
+  .button-container button {
+    margin-right: 10px; /* Ajoutez l'espace souhaité entre les boutons en ajustant la valeur de margin-right */
+  }
 
   /* Add this style for the success snackbar */
 .success-snackbar {
