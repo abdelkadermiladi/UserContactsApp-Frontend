@@ -1,0 +1,25 @@
+<div class="update-contact-form">
+  <h3>Modification du contact:</h3>
+    <form>
+      <div class="form-group">
+        <label for="contactname">Nom du contact:</label>
+        <input type="text" id="contactname" [(ngModel)]="contact.contactname" name="contactname" required pattern="[a-zA-Z\s]*" minlength="3" />
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="contact.email" name="email" />
+      </div>
+  
+      <div class="form-group">
+        <label for="phoneNumber">Numéro de téléphone:</label>
+        <input type="tel" id="phoneNumber" [(ngModel)]="contact.phoneNumber" name="phoneNumber" required pattern="[0-9]{8}" />
+      </div>
+  
+      <div class="button-container">
+        <button (click)="onUpdateContact()">Confirmer</button>
+        <button (click)="closeDialog()">Annuler</button>
+      </div>
+    </form>
+  </div>
+  

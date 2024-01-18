@@ -5,6 +5,9 @@ import { User } from '../../../model.user';
 import { Contact } from '../../../model.contact';
 import { MatDialog } from '@angular/material/dialog';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UpdateContactDialogComponent } from '../update-contact-dialog/update-contact-dialog.component';
 
 
 @Component({
@@ -20,10 +23,11 @@ export class HomeComponent implements OnInit {
   email: string = '';
   otherUsersNames: string[] = [];
   selectedUser: User | null = null;
-  newContact: { contactname: string, email: string, phoneNumber: number } = { contactname: '', email: '', phoneNumber: 0 };
+  newContact: { id: number,contactname: string, email: string, phoneNumber: number } = { id: 0,contactname: '', email: '', phoneNumber: 0 };
   contacts: Contact[] = [];
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router,public dialog: MatDialog) {}
+  constructor(private route: ActivatedRoute, private userService: UserService, 
+    private router: Router,public dialog: MatDialog,private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     // Fetch user information from the backend based on the username
@@ -81,29 +85,55 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  private showSnackbar(message: string, panelClass: string): void {
+    this.snackBar.open(message, 'Fermer', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      panelClass: [panelClass]
+    });
+  }
 
   removeContact(contact: Contact): void {
-    this.userService.removeContact(contact).subscribe(
-      response => {
-        if (response && response.message === 'Contact removed successfully') {
-          console.log(response.message);
-          // Mettez à jour la liste des contacts après la suppression réussie
-          this.contacts = this.contacts.filter(c => c !== contact);
-        } else {
-          console.error('Erreur inattendue lors de la suppression du contact');
-        }
-      },
-      error => {
-        console.error('Erreur lors de la suppression du contact', error);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: { title: 'Supression du contact:', message: 'Voulez-vous vraiment supprimer ce contact?' },
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.userService.removeContact(contact).subscribe(
+          (response) => {
+            if (response && response.message === 'Contact removed successfully') {
+              console.log(response.message);
+              this.showSnackbar('Contact supprimé avec succès!', 'success-snackbar');
+              this.contacts = this.contacts.filter((c) => c !== contact);
+            } else {
+              console.error('Erreur inattendue lors de la suppression du contact');
+            }
+          },
+          (error) => {
+            console.error('Erreur lors de la suppression du contact', error);
+          }
+        );
       }
-    );
+    });
   }
+  
 
 
   openAddContactDialog(): void {
     const dialogRef = this.dialog.open(AddContactDialogComponent, {
       width: '400px',
-      // Ajoutez d'autres configurations de dialogue si nécessaire
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
+  }
+
+  openUpdateContactDialog(contact: Contact): void {
+    const dialogRef = this.dialog.open(UpdateContactDialogComponent, {
+      width: '400px',
+      data: { contact: contact }, // Pass the contact data to the dialog
     });
   
     dialogRef.afterClosed().subscribe(result => {

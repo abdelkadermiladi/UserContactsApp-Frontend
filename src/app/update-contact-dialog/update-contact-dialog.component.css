@@ -1,0 +1,71 @@
+.update-contact-form {
+    border: 2px solid #3498db;
+    padding: 20px;
+    width: 300px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .button-container {
+    text-align: center; /* Centrer le bouton à l'intérieur du conteneur */
+  }
+  .button-container button {
+    margin-right: 10px; /* Ajoutez l'espace souhaité entre les boutons en ajustant la valeur de margin-right */
+  }
+
+  /* Add this style for the success snackbar */
+.success-snackbar {
+  background-color: #4caf50; /* Green */
+  color: #fff;
+}
+
+/* Add this style for the error snackbar */
+.error-snackbar {
+  background-color: #f44336; /* Red */
+  color: #fff;
+}
+.error-message-con {
+  color: red;
+  font-size: 10px; /* Adjust the font size as needed */
+}
+h3{
+    color: rgb(255, 136, 0);
+    text-align: center;
+}

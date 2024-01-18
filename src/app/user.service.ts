@@ -33,8 +33,13 @@ export class UserService {
 
 
   removeContact(contact: Contact): Observable<any> {
-    const url = `${this.apiUrl}/remove-contact/${contact.contactname}`;
+    const url = `${this.apiUrl}/remove-contact/${contact.id}`;
     return this.http.delete(url);
+  }
+
+  updateContact(contact: Contact): Observable<any> {
+    const url = `${this.apiUrl}/update-contact/${contact.id}`;
+    return this.http.put(url,contact);
   }
   
 

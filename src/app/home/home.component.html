@@ -38,7 +38,7 @@
         <button class="remove-contact-button" (click)="removeContact(contact)" matTooltip="Supprimer le contact">
           <mat-icon>delete</mat-icon>
         </button>
-        <button class="update-contact-button"  matTooltip="Modifier le contact">
+        <button class="update-contact-button"  (click)="openUpdateContactDialog(contact)" matTooltip="Modifier le contact">
           <mat-icon>edit</mat-icon>
         </button>
       </td>

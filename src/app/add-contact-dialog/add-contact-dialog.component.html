@@ -1,6 +1,6 @@
 <!-- Formulaire pour ajouter un contact -->
 <div class="add-contact-form">
-  <form (ngSubmit)="onAddContact()" #addContactForm="ngForm">
+  <form #addContactForm="ngForm">
     <div class="form-group">
       <label for="contactname">Nom du contact:</label>
       <input type="text" id="contactname" [(ngModel)]="newContact.contactname" name="contactname" required pattern="[a-zA-Z\s]*" minlength="3" />
@@ -23,7 +23,7 @@
     </div>
 
     <div class="button-container">
-      <button type="submit">Confirmer</button>
+      <button (click)="onAddContact()">Confirmer</button>
       <button (click)="closeDialog()">Annuler</button>
     </div>
 

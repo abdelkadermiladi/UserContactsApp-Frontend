@@ -13,13 +13,17 @@ import { AddContactDialogComponent } from './add-contact-dialog/add-contact-dial
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { UpdateContactDialogComponent } from './update-contact-dialog/update-contact-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    AddContactDialogComponent
+    AddContactDialogComponent,
+    ConfirmationDialogComponent,
+    UpdateContactDialogComponent
   ],
   imports: [
     BrowserModule,
