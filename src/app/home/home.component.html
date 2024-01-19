@@ -15,63 +15,60 @@
 
 
 <div class="contacts-container">
-<h2>Liste des Contacts:
-  <button class="add-contact-button" (click)="openAddContactDialog()" matTooltip="Nouveau contact">
-    <span class="icon"><mat-icon>person_add</mat-icon></span>
-  </button>
-</h2>
-<table *ngIf="contacts && contacts.length > 0" class="contacts-table">
-  <thead>
-    <tr>
-      <th>Contact Name</th>
-      <th>Email</th>
-      <th>Phone Number</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let contact of contacts">
-      <td>{{ contact.contactname }}</td>
-      <td>{{ contact.email }}</td>
-      <td>{{ contact.phoneNumber }}</td>
-      <td>
-        <button class="remove-contact-button" (click)="removeContact(contact)" matTooltip="Supprimer le contact">
-          <mat-icon>delete</mat-icon>
-        </button>
-        <button class="update-contact-button"  (click)="openUpdateContactDialog(contact)" matTooltip="Modifier le contact">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div *ngIf="contacts && contacts.length === 0">
-  <p>Votre liste des contacts est vide!</p>
+  <h2>Liste des Contacts:
+    <button class="add-contact-button" (click)="openAddContactDialog()" matTooltip="Nouveau contact">
+      <span class="icon"><mat-icon>person_add</mat-icon></span>
+    </button>
+  </h2>
+  <table *ngIf="contacts && contacts.length > 0" class="contacts-table">
+    <thead>
+      <tr>
+        <th (click)="toggleSortDirection()">Contact Name <span class="sort-icon">&#9660;</span></th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts">
+        <td>{{ contact.contactname }}</td>
+        <td>{{ contact.email }}</td>
+        <td>{{ contact.phoneNumber }}</td>
+        <td>
+          <button class="remove-contact-button" (click)="removeContact(contact)" matTooltip="Supprimer le contact">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button class="update-contact-button" (click)="openUpdateContactDialog(contact)" matTooltip="Modifier le contact">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="contacts && contacts.length === 0">
+    <p>Votre liste des contacts est vide!</p>
+  </div>
 </div>
-</div>
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-<h3>Other User Names:</h3>
-<ul>
-  <li *ngFor="let otherUserName of otherUsersNames">
-    {{ otherUserName }}
-    <button (click)="viewUserProfile(otherUserName)">View Profile</button>
-    <div *ngIf="selectedUser && selectedUser.username === otherUserName" class="user-details-box">
-      <!-- Display details for the selected user -->
-      <div class="user-details">
-        <p>Gender: {{ selectedUser.gender }}</p>
-        <p>Age: {{ selectedUser.age }}</p>
-        <p>phoneNumber: {{ selectedUser.phoneNumber }}</p>
-        <p>email: {{ selectedUser.email }}</p>
-      </div>
-    </div>
-    <br>
-  </li>
-</ul>
+<app-users-list></app-users-list>
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-<mat-icon>add</mat-icon>
-<mat-icon>edit</mat-icon>
-
-<mat-icon>delete</mat-icon>
+<div *ngIf="notifications && notifications.length > 0">
+  <h3>Notifications</h3>
+  <table>
+      <thead>
+          <tr>
+              <th>Message</th>
+              <th>Time</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let notification of notifications">
+              <td>{{ notification.message }}</td>
+              <td>{{ notification.time | date:'medium' }}</td>
+          </tr>
+      </tbody>
+  </table>
+</div>

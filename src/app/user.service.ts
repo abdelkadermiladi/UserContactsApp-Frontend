@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { User } from '../../model.user';
 import { Contact } from '../../model.contact';
-//import { Contact } from '../../model.contact';
+import { ViewNotification } from '../../model.notification';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,7 @@ export class UserService {
   }
 
   getAllUsers(): Observable<User[]> {
-    
     return this.http.get<User[]>(`${this.apiUrl}/users`);
-
   }
 
   addContact(contact: { contactname: string, email: string, phoneNumber: number }): Observable<any> {
@@ -41,6 +41,18 @@ export class UserService {
     const url = `${this.apiUrl}/update-contact/${contact.id}`;
     return this.http.put(url,contact);
   }
-  
+
+  // notifyUser(username: string, message: string): void {
+  //   // Assuming you have a WebSocketService injected into this service
+  //   this.webSocketService.notifyUser(username, message);
+  // }
+
+  getUserNotifications(): Observable<ViewNotification[]> {
+    return this.http.get<ViewNotification[]>(`${this.apiUrl}/notifications`);
+  }
+  addUserNotification(viewedUsername: string): Observable<any> {
+    const url = `${this.apiUrl}/users/${viewedUsername}`;
+    return this.http.post(url, {});
+  }
 
 }

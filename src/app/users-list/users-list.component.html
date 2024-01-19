@@ -1,0 +1,22 @@
+<h3>Other User Names:</h3>
+<ul>
+  <li *ngFor="let otherUserName of otherUsersNames">
+    {{ otherUserName }}
+    <button (click)="viewUserProfile(otherUserName)">View Profile</button>
+    <div *ngIf="selectedUser && selectedUser.username === otherUserName" class="user-details-box">
+      <!-- Display details for the selected user -->
+      <div class="user-details">
+        <p>Name: {{ otherUserName }}</p>
+        <p>Gender: {{ selectedUser.gender }}</p>
+        <p>Age: {{ selectedUser.age }}</p>
+        <p>phoneNumber: {{ selectedUser.phoneNumber }}</p>
+        <p>email: {{ selectedUser.email }}</p>
+      </div>
+    </div>
+    <br>
+  </li>
+</ul>
+<div *ngIf="notificationMessage" class="notification">
+  {{ notificationMessage }}
+</div>
+

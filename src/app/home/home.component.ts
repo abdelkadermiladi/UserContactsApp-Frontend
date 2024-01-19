@@ -3,11 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { User } from '../../../model.user';
 import { Contact } from '../../../model.contact';
+
 import { MatDialog } from '@angular/material/dialog';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpdateContactDialogComponent } from '../update-contact-dialog/update-contact-dialog.component';
+import { ViewNotification } from '../../../model.notification';
 
 
 @Component({
@@ -25,9 +27,12 @@ export class HomeComponent implements OnInit {
   selectedUser: User | null = null;
   newContact: { id: number,contactname: string, email: string, phoneNumber: number } = { id: 0,contactname: '', email: '', phoneNumber: 0 };
   contacts: Contact[] = [];
+  notifications: ViewNotification[] = [];
+
 
   constructor(private route: ActivatedRoute, private userService: UserService, 
-    private router: Router,public dialog: MatDialog,private snackBar: MatSnackBar) {}
+    private router: Router,public dialog: MatDialog,private snackBar: MatSnackBar,
+    ) {}
 
   ngOnInit(): void {
     // Fetch user information from the backend based on the username
@@ -45,17 +50,6 @@ export class HomeComponent implements OnInit {
       }
     );
 
-    // Fetch other users
-    this.userService.getAllUsers().subscribe(
-      users => {
-        this.otherUsersNames = users.map(user => user.username);
-        // Filter out the authenticated user's name
-        this.otherUsersNames = this.otherUsersNames.filter(username => username !== this.username);
-      },
-      error => {
-        console.error('Failed to fetch other user names', error);
-      }
-    );
 
     this.userService.listContacts().subscribe(
       (contacts) => {
@@ -66,24 +60,50 @@ export class HomeComponent implements OnInit {
       }
     );
 
+  // Fetch notifications when the component is initialized
+    this.userService.getUserNotifications().subscribe(
+      (notifications) => {
+          this.notifications = notifications;
+      },
+      (error) => {
+          console.error('Failed to fetch notifications', error);
+      }
+  );
+
   }
 
 
+
+    // Variable to track the sort direction
+    isAscending: boolean = true;
+
+    // Function to toggle the sort direction
+    toggleSortDirection(): void {
+      this.isAscending = !this.isAscending;
+      this.sortContacts();
+    }
+  
+    // Function to sort the contacts array
+    sortContacts(): void {
+      this.contacts.sort((a, b) => {
+        const nameA = a.contactname.toUpperCase();
+        const nameB = b.contactname.toUpperCase();
+  
+        if (nameA < nameB) {
+          return this.isAscending ? -1 : 1;
+        }
+        if (nameA > nameB) {
+          return this.isAscending ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+
+    
   logout(): void {
     this.router.navigate(['/login']);
   }
 
-  // Method to view user profile
-  viewUserProfile(otherUserName: string): void {
-    this.userService.getUserDetails(otherUserName).subscribe(
-      userDetails => {
-        this.selectedUser = userDetails;
-      },
-      error => {
-        console.error('Failed to fetch user details', error);
-      }
-    );
-  }
 
   private showSnackbar(message: string, panelClass: string): void {
     this.snackBar.open(message, 'Fermer', {

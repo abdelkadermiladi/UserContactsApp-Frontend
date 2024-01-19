@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { UpdateContactDialogComponent } from './update-contact-dialog/update-contact-dialog.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UpdateContactDialogComponent } from './update-contact-dialog/update-con
     HomeComponent,
     AddContactDialogComponent,
     ConfirmationDialogComponent,
-    UpdateContactDialogComponent
+    UpdateContactDialogComponent,
+    UsersListComponent,
   ],
   imports: [
     BrowserModule,
