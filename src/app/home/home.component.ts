@@ -10,6 +10,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpdateContactDialogComponent } from '../update-contact-dialog/update-contact-dialog.component';
 import { ViewNotification } from '../../../model.notification';
+import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
 
 
 @Component({
@@ -61,16 +62,17 @@ export class HomeComponent implements OnInit {
     );
 
   // Fetch notifications when the component is initialized
-    this.userService.getUserNotifications().subscribe(
-      (notifications) => {
-          this.notifications = notifications;
-      },
-      (error) => {
-          console.error('Failed to fetch notifications', error);
-      }
-  );
+  this.userService.getUserNotifications().subscribe(
+    (notifications) => {
+        this.notifications = notifications;
+    },
+    (error) => {
+        console.error('Failed to fetch notifications', error);
+    }
+);
 
   }
+
 
 
 
@@ -161,5 +163,15 @@ export class HomeComponent implements OnInit {
     });
   }
   
+  openNotificationDialog(): void {
+    const dialogRef = this.dialog.open(NotificationDialogComponent, {
+      width: '500px', // Ajustez la largeur selon vos besoins
+      data: { notifications: this.notifications } // Passez les données à afficher dans la boîte de dialogue
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('La boîte de dialogue a été fermée');
+    });
+  }
   
 }

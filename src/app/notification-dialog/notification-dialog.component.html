@@ -1,0 +1,16 @@
+<!-- notification-dialog.component.html -->
+<h3>Notifications:</h3>
+<table>
+  <thead>
+    <tr>
+      <th>View</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let notification of sortedNotifications">
+      <td>{{ notification.message }}</td>
+      <td>{{ calculateTimeElapsed(notification.time) }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,10 +1,59 @@
+/* user-list.component.css */
+.section-title {
+  color: #000000; /* Blue color for section titles */
+}
+
+.user-table-container {
+  display: flex;
+  justify-content: space-between; /* Distribute space between elements */
+  width: 40%; /* Adjust width as needed */
+  margin: 20px auto; /* Center the container horizontally and provide top and bottom margin */
+}
+
+.user-table {
+  width: 48%; /* Adjust width as needed */
+  border-collapse: collapse;
+}
+
+.user-table th, .user-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.user-table th {
+  background-color: #f2f2f2;
+}
+
+.user-table tr.selected {
+  background-color: #eaf5fd; /* Light blue background for selected row */
+}
+
+.user-table button {
+  background-color: #3498db; /* Blue button color */
+  color: #fff; /* White text color */
+  padding: 6px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.user-details-container {
+  width: 65%; /* Adjust width as needed */
+}
+
 .user-details-box {
-    border: 5px solid #ccc;
-    padding: 10px;
-    margin-top: 10px;
-    display: flex; /* Use flexbox to align items horizontally */
-  }
-  
-  .user-details {
-    margin-bottom: 10px;
-  }
+  border: 5px solid #3498db; /* Blue border color */
+  padding: 20px;
+  background-color: #f9f9f9; /* Light gray background color */
+}
+
+.user-details p {
+  margin: 6px 0;
+}
+
+.notification {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #e74c3c; /* Red background color */
+  color: #fff; /* White text color */
+}

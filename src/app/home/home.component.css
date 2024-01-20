@@ -62,6 +62,16 @@ p {
   cursor: pointer;
 }
 
+.logout-icon,
+.notification-icon {
+  position: fixed;
+  top: 10px;
+  cursor: pointer;
+}
+.notification-icon {
+  right: 60px;
+}
+
 .contacts-container {
   max-width: 1000px;
   margin: 0 auto; /* Center the container horizontally */
@@ -87,3 +97,6 @@ p {
   cursor: pointer;
   margin-right: 5px;
 }
+
+
+

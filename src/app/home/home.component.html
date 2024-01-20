@@ -5,15 +5,16 @@
   <p>Phone Number: {{ phoneNumber }}</p>
   <p>Email: {{ email }}</p>
 </div>
-
-
 <div class="logout-icon">
-  <button type="button" (click)="logout()">
+  <button type="button" (click)="logout()" matTooltip="Log Out">
     <mat-icon>exit_to_app</mat-icon>
   </button>
 </div>
-
-
+<div class="notification-icon">
+  <button type="button" (click)="openNotificationDialog()" matTooltip="Notifications">
+    <mat-icon>notifications</mat-icon>
+  </button>
+</div>
 <div class="contacts-container">
   <h2>Liste des Contacts:
     <button class="add-contact-button" (click)="openAddContactDialog()" matTooltip="Nouveau contact">
@@ -49,26 +50,7 @@
     <p>Votre liste des contacts est vide!</p>
   </div>
 </div>
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 <app-users-list></app-users-list>
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-<div *ngIf="notifications && notifications.length > 0">
-  <h3>Notifications</h3>
-  <table>
-      <thead>
-          <tr>
-              <th>Message</th>
-              <th>Time</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let notification of notifications">
-              <td>{{ notification.message }}</td>
-              <td>{{ notification.time | date:'medium' }}</td>
-          </tr>
-      </tbody>
-  </table>
-</div>
+
+

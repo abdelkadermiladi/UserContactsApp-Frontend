@@ -1,22 +1,41 @@
-<h3>Other User Names:</h3>
-<ul>
-  <li *ngFor="let otherUserName of otherUsersNames">
-    {{ otherUserName }}
-    <button (click)="viewUserProfile(otherUserName)">View Profile</button>
-    <div *ngIf="selectedUser && selectedUser.username === otherUserName" class="user-details-box">
-      <!-- Display details for the selected user -->
+<!-- user-list.component.html -->
+<div class="user-table-container">
+  <div class="user-table">
+    <!-- <mat-icon>search</mat-icon> -->
+    <h2 class="section-title">Other Users: 
+    </h2> 
+    <table>
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let otherUserName of otherUsersNames" [class.selected]="selectedUser && selectedUser.username === otherUserName">
+          <td>{{ otherUserName }}</td>
+          <td>
+            <button (click)="viewUserProfile(otherUserName)">View Profile</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="user-details-container">
+    <div *ngIf="selectedUser" class="user-details-box">
+      <h3 class="section-title">{{ selectedUser.username }}'s Profile</h3>
       <div class="user-details">
-        <p>Name: {{ otherUserName }}</p>
-        <p>Gender: {{ selectedUser.gender }}</p>
-        <p>Age: {{ selectedUser.age }}</p>
-        <p>phoneNumber: {{ selectedUser.phoneNumber }}</p>
-        <p>email: {{ selectedUser.email }}</p>
+        <p><strong>Name:</strong> {{ selectedUser.username }}</p>
+        <p><strong>Gender:</strong> {{ selectedUser.gender }}</p>
+        <p><strong>Age:</strong> {{ selectedUser.age }}</p>
+        <p><strong>Phone Number:</strong> {{ selectedUser.phoneNumber }}</p>
+        <p><strong>Email:</strong> {{ selectedUser.email }}</p>
       </div>
     </div>
-    <br>
-  </li>
-</ul>
-<div *ngIf="notificationMessage" class="notification">
-  {{ notificationMessage }}
-</div>
 
+    <div *ngIf="notificationMessage" class="notification">
+      {{ notificationMessage }}
+    </div>
+  </div>
+</div>
