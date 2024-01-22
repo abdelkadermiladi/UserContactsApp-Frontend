@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
-import { User } from '../../../model.user';
-import { Contact } from '../../../model.contact';
+import { User } from '../../../user.model';
+import { Contact } from '../../../contact.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpdateContactDialogComponent } from '../update-contact-dialog/update-contact-dialog.component';
-import { ViewNotification } from '../../../model.notification';
+import { ViewNotification } from '../../../notification.model';
 import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
 
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { User } from '../../model.user';
-import { Contact } from '../../model.contact';
-import { ViewNotification } from '../../model.notification';
+import { User } from '../../user.model';
+import { Contact } from '../../contact.model';
+import { ViewNotification } from '../../notification.model';
 
 
 

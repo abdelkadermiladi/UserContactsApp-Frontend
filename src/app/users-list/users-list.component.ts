@@ -1,7 +1,7 @@
 // users-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { User } from '../../../model.user';
+import { User } from '../../../user.model';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
 import { UserProfileDialogComponent } from '../user-profile-dialog/user-profile-dialog.component';
@@ -48,6 +48,16 @@ export class UsersListComponent implements OnInit {
     this.userService.getUserDetails(otherUserName).subscribe(
       userDetails => {
         this.selectedUser = userDetails;
+
+              // Add notification when user's profile is viewed
+              this.userService.addUserNotification(otherUserName).subscribe(
+                response => {
+                    console.log(response);
+                    // Handle success if needed
+                },
+                error => {
+                    console.error('Error adding notification', error);
+                });
 
         // Open the dialog with user details
         const dialogRef = this.dialog.open(UserProfileDialogComponent, {
