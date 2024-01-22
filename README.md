@@ -1,27 +1,40 @@
-# OnlineChatAppFront
+# User Contacts Web Application Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
+## Introduction
+This is a user contacts web application developed using Spring Boot, Angular, and MySQL. The application provides features such as user authentication, user details management, a list of available users, user profile viewing, and contact management.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. **User Authentication:**
+   - Users can register and log in to the application
 
-## Code scaffolding
+2. **User Details:**
+   - Authenticated users can manage their profile details.
+   - Profile details include name, email, and other relevant information.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+3. **List of Available Users:**
+   - Users can view a list of other registered users.
+   - A search functionality is available to find specific users.
 
-## Build
+4. **Profile Viewing:**
+   - Users can view the profiles of other users.
+   - When a user views someone else's profile, a notification is sent to the profile owner with details about who viewed their profile and the time of viewing.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+5. **Contact Management:**
+   - Authenticated users can add contacts to their list.
+   - Contact information includes name, phone number, and email.
+   - Users can update, delete, and view details of their contacts.
 
-## Running unit tests
+6. **Email Notifications:**
+   - When a contact is added, an email notification is sent to the added contact.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Technologies Used
 
-## Running end-to-end tests
+- **Backend:**
+  - Spring Boot (Java)
+  - MySQL for data storage
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+- **Frontend:**
+  - Angular (TypeScript)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
