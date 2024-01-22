@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { User } from '../../../model.user';
 import { Contact } from '../../../model.contact';
-
 import { MatDialog } from '@angular/material/dialog';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
@@ -29,6 +28,8 @@ export class HomeComponent implements OnInit {
   newContact: { id: number,contactname: string, email: string, phoneNumber: number } = { id: 0,contactname: '', email: '', phoneNumber: 0 };
   contacts: Contact[] = [];
   notifications: ViewNotification[] = [];
+  // Variable to track the sort direction
+  isAscending: boolean = true;
 
 
   constructor(private route: ActivatedRoute, private userService: UserService, 
@@ -61,23 +62,17 @@ export class HomeComponent implements OnInit {
       }
     );
 
-  // Fetch notifications when the component is initialized
-  this.userService.getUserNotifications().subscribe(
-    (notifications) => {
-        this.notifications = notifications;
-    },
-    (error) => {
-        console.error('Failed to fetch notifications', error);
-    }
-);
+    // Fetch notifications when the component is initialized
+    this.userService.getUserNotifications().subscribe(
+      (notifications) => {
+          this.notifications = notifications;
+      },
+      (error) => {
+          console.error('Failed to fetch notifications', error);
+      }
+    );
 
   }
-
-
-
-
-    // Variable to track the sort direction
-    isAscending: boolean = true;
 
     // Function to toggle the sort direction
     toggleSortDirection(): void {
@@ -105,7 +100,6 @@ export class HomeComponent implements OnInit {
   logout(): void {
     this.router.navigate(['/login']);
   }
-
 
   private showSnackbar(message: string, panelClass: string): void {
     this.snackBar.open(message, 'Fermer', {
@@ -140,7 +134,6 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-  
 
 
   openAddContactDialog(): void {
@@ -165,8 +158,8 @@ export class HomeComponent implements OnInit {
   
   openNotificationDialog(): void {
     const dialogRef = this.dialog.open(NotificationDialogComponent, {
-      width: '500px', // Ajustez la largeur selon vos besoins
-      data: { notifications: this.notifications } // Passez les données à afficher dans la boîte de dialogue
+      width: '500px', 
+      data: { notifications: this.notifications }
     });
   
     dialogRef.afterClosed().subscribe(result => {

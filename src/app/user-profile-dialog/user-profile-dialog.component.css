@@ -1,0 +1,41 @@
+/* user-profile-dialog.component.css */
+.user-profile-container {
+  width: 300px; /* Adjust the width of the square as needed */
+  height: 300px; /* Adjust the height of the square as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+
+.header {
+  text-align: center;
+}
+
+.content {
+  margin-top: 20px;
+  flex-grow: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-button {
+  background-color: #f44336; /* Red background color */
+  color: #fff; /* White text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}

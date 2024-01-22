@@ -17,7 +17,9 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { UpdateContactDialogComponent } from './update-contact-dialog/update-contact-dialog.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { UserProfileDialogComponent } from './user-profile-dialog/user-profile-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +30,7 @@ import { NotificationDialogComponent } from './notification-dialog/notification-
     UpdateContactDialogComponent,
     UsersListComponent,
     NotificationDialogComponent,
+    UserProfileDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,8 @@ import { NotificationDialogComponent } from './notification-dialog/notification-
     MatSnackBarModule,
     MatIconModule,
     MatTooltipModule,
+    MatTableModule,
+    MatInputModule, // Add other necessary modules
   ],
   providers: [
     provideClientHydration()

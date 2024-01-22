@@ -23,13 +23,15 @@ export class LoginComponent {
   
           // Navigate to the welcome page and pass the username as a query parameter
           this.router.navigate(['/welcome'], { queryParams: { username: this.username } });
-        } else {
-          console.log('Login failed');
-        }
+        } 
       },
       error => {
         console.error('Login failed', error);
+        if (error.status === 401) {
+          // Display a custom error message to the user
+          alert('No user with such credentials. Please try again.');
+        }
       }
     );
-}
+  }
 }

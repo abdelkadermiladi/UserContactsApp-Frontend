@@ -42,11 +42,6 @@ export class UserService {
     return this.http.put(url,contact);
   }
 
-  // notifyUser(username: string, message: string): void {
-  //   // Assuming you have a WebSocketService injected into this service
-  //   this.webSocketService.notifyUser(username, message);
-  // }
-
   getUserNotifications(): Observable<ViewNotification[]> {
     return this.http.get<ViewNotification[]>(`${this.apiUrl}/notifications`);
   }

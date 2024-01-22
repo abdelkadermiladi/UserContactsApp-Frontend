@@ -1,41 +1,27 @@
-<!-- user-list.component.html -->
-<div class="user-table-container">
-  <div class="user-table">
-    <!-- <mat-icon>search</mat-icon> -->
-    <h2 class="section-title">Other Users: 
-    </h2> 
-    <table>
-      <thead>
-        <tr>
-          <th>User Name</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let otherUserName of otherUsersNames" [class.selected]="selectedUser && selectedUser.username === otherUserName">
-          <td>{{ otherUserName }}</td>
-          <td>
-            <button (click)="viewUserProfile(otherUserName)">View Profile</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<!-- users-list.component.html -->
+<div class="users-container">
+  <div class="search-container">
+    <mat-form-field class="search-input">
+      <input matInput placeholder="Search" [(ngModel)]="searchInput" (input)="onSearchInputChange()">
+    </mat-form-field>
   </div>
 
-  <div class="user-details-container">
-    <div *ngIf="selectedUser" class="user-details-box">
-      <h3 class="section-title">{{ selectedUser.username }}'s Profile</h3>
-      <div class="user-details">
-        <p><strong>Name:</strong> {{ selectedUser.username }}</p>
-        <p><strong>Gender:</strong> {{ selectedUser.gender }}</p>
-        <p><strong>Age:</strong> {{ selectedUser.age }}</p>
-        <p><strong>Phone Number:</strong> {{ selectedUser.phoneNumber }}</p>
-        <p><strong>Email:</strong> {{ selectedUser.email }}</p>
-      </div>
-    </div>
+  <div class="users-table-container">
+    <mat-table [dataSource]="otherUsersNames" class="mat-elevation-z8">
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef>User Name</mat-header-cell>
+        <mat-cell *matCellDef="let username">{{ username }}</mat-cell>
+      </ng-container>
 
-    <div *ngIf="notificationMessage" class="notification">
-      {{ notificationMessage }}
-    </div>
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+        <mat-cell *matCellDef="let username">
+          <button mat-raised-button color="primary" class="view-profile-button" (click)="viewUserProfile(username)">View Profile</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['username', 'action']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['username', 'action'];" [class.selected]="selectedUser && selectedUser.username === row"></mat-row>
+    </mat-table>
   </div>
 </div>

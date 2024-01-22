@@ -1,59 +1,68 @@
-/* user-list.component.css */
-.section-title {
-  color: #000000; /* Blue color for section titles */
-}
-
-.user-table-container {
+/* users-list.component.css */
+.users-container {
   display: flex;
-  justify-content: space-between; /* Distribute space between elements */
-  width: 40%; /* Adjust width as needed */
-  margin: 20px auto; /* Center the container horizontally and provide top and bottom margin */
-}
-
-.user-table {
-  width: 48%; /* Adjust width as needed */
-  border-collapse: collapse;
-}
-
-.user-table th, .user-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-.user-table th {
-  background-color: #f2f2f2;
-}
-
-.user-table tr.selected {
-  background-color: #eaf5fd; /* Light blue background for selected row */
-}
-
-.user-table button {
-  background-color: #3498db; /* Blue button color */
-  color: #fff; /* White text color */
-  padding: 6px 10px;
-  border: none;
-  cursor: pointer;
-}
-
-.user-details-container {
-  width: 65%; /* Adjust width as needed */
-}
-
-.user-details-box {
-  border: 5px solid #3498db; /* Blue border color */
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  background-color: #f9f9f9; /* Light gray background color */
 }
 
-.user-details p {
-  margin: 6px 0;
+.search-container {
+  display: flex;
+  align-items: center; /* Align items vertically */
 }
 
-.notification {
-  margin-top: 20px;
-  padding: 12px;
-  background-color: #e74c3c; /* Red background color */
+.search-input {
+  display: flex;
+  align-items: center; /* Align items vertically within the input container */
+  width: 300px;
+  margin-left: 10px; /* Add some left margin between the icon and input */
+}
+
+.users-table-container {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mat-row, .mat-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-cell, .mat-header-cell {
+  flex: 1;
+  text-align: center;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+}
+
+.selected {
+  background-color: #e6f7ff; /* Light blue for selected rows */
+}
+
+.view-profile-button {
+  background-color: #2196f3; /* Blue background color */
   color: #fff; /* White text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.view-profile-button:hover {
+  background-color: #1565c0; /* Darker blue on hover */
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
 }

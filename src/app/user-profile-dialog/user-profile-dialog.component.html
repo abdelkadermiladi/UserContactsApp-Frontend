@@ -1,0 +1,17 @@
+<!-- user-profile-dialog.component.html -->
+<div class="user-profile-container">
+  <div class="header">
+    <h2>{{ data.user.username }}'s Profile</h2>
+  </div>
+  <div class="content">
+    <p><strong>Name:</strong> {{ data.user.username }}</p>
+    <p><strong>Gender:</strong> {{ data.user.gender }}</p>
+    <p><strong>Age:</strong> {{ data.user.age }}</p>
+    <p><strong>Phone Number:</strong> {{ data.user.phoneNumber }}</p>
+    <p><strong>Email:</strong> {{ data.user.email }}</p>
+  </div>
+
+  <div class="footer">
+    <button mat-raised-button color="primary" class="close-button" (click)="onClose()">Close</button>
+  </div>
+</div>

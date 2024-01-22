@@ -55,21 +55,42 @@ p {
   font-weight: bold;
 }
 
+/* Add these styles to your CSS file */
+.logout-icon button,
+.notification-icon button {
+  background-color: #f14116; /* Green background color */
+  color: #fff; /* White text color */
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-right: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow for elevation */
+}
+
+.notification-icon button {
+  background-color: #4285f4; /* Blue background color for notification button */
+}
+
 .logout-icon {
   position: fixed;
   top: 10px;
-  right: 10px;
+  right: 50px;
   cursor: pointer;
 }
 
-.logout-icon,
-.notification-icon {
+.logout-icon button,
+.notification-icon button {
   position: fixed;
   top: 10px;
   cursor: pointer;
 }
+
 .notification-icon {
-  right: 60px;
+  position: fixed;
+  top: 10px;
+  right: 100px;
+  cursor: pointer;
 }
 
 .contacts-container {
