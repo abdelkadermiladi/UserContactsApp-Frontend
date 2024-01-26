@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .left-component,
+  .right-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 5;
+    margin-top: 80px;
+    margin-bottom: 20px;
+  }
+  

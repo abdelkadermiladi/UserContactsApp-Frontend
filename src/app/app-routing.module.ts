@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { FirstPageComponent } from './first-page/first-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'welcome', component: HomeComponent },
-  { path: 'logout', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
+  { path: 'welcome', component: FirstPageComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'logout', redirectTo: '/welcome', pathMatch: 'full' },
 
 
 ];

@@ -22,7 +22,7 @@ export class LoginComponent {
           console.log('Login successful');
   
           // Navigate to the welcome page and pass the username as a query parameter
-          this.router.navigate(['/welcome'], { queryParams: { username: this.username } });
+          this.router.navigate(['/home'], { queryParams: { username: this.username } });
         } 
       },
       error => {

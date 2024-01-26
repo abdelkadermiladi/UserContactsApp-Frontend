@@ -20,6 +20,8 @@ import { NotificationDialogComponent } from './notification-dialog/notification-
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { UserProfileDialogComponent } from './user-profile-dialog/user-profile-dialog.component';
+import { RegisterComponent } from './register/register.component';
+import { FirstPageComponent } from './first-page/first-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +33,8 @@ import { UserProfileDialogComponent } from './user-profile-dialog/user-profile-d
     UsersListComponent,
     NotificationDialogComponent,
     UserProfileDialogComponent,
+    RegisterComponent,
+    FirstPageComponent,
   ],
   imports: [
     BrowserModule,
