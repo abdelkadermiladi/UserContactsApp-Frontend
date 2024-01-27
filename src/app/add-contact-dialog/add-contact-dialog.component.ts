@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UserService } from '../user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../auth.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-contact-dialog',
@@ -10,17 +12,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AddContactDialogComponent {
 
-
   constructor(
     public dialogRef: MatDialogRef<AddContactDialogComponent>,
     private userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService:AuthService
+
   ) {}
+  
+  jwtToken = this.authService.getJwtToken();
+  headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtToken}`);
 
   newContact: { contactname: string, email: string, phoneNumber: number } = { contactname: '', email: '', phoneNumber: 0 };
 
   onAddContact(): void {
-    this.userService.addContact(this.newContact).subscribe(
+    this.userService.addContact(this.newContact,this.headers).subscribe(
       response => {
         console.log(response);
         this.showSnackbar('Contact ajouté avec succès!', 'success-snackbar');

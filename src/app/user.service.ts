@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable} from 'rxjs';
 import { User } from '../../user.model';
 import { Contact } from '../../contact.model';
 import { ViewNotification } from '../../notification.model';
@@ -15,39 +15,39 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getUserDetails(username: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/users/${username}`);
+  getUserDetails(username: string, headers: HttpHeaders): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users/${username}`,{ headers });
   }
 
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/users`);
+  getAllUsers(headers: HttpHeaders): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/users`,{ headers });
   }
 
-  addContact(contact: { contactname: string, email: string, phoneNumber: number }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/add-contact`, contact);
+  addContact(contact: { contactname: string, email: string, phoneNumber: number },headers: HttpHeaders): Observable<any> {
+    return this.http.post(`${this.apiUrl}/add-contact`, contact, { headers });
   }
 
-  listContacts(): Observable<Contact[]> {
-    return this.http.get<Contact[]>(`${this.apiUrl}/list-contacts`);
+  listContacts(headers: HttpHeaders): Observable<Contact[]> {
+    return this.http.get<Contact[]>(`${this.apiUrl}/list-contacts`, { headers });
   }
 
 
-  removeContact(contact: Contact): Observable<any> {
+  removeContact(contact: Contact,headers: HttpHeaders): Observable<any> {
     const url = `${this.apiUrl}/remove-contact/${contact.id}`;
-    return this.http.delete(url);
+    return this.http.delete(url,{ headers });
   }
 
-  updateContact(contact: Contact): Observable<any> {
+  updateContact(contact: Contact,headers: HttpHeaders): Observable<any> {
     const url = `${this.apiUrl}/update-contact/${contact.id}`;
-    return this.http.put(url,contact);
+    return this.http.put(url,contact,{ headers });
   }
 
-  getUserNotifications(): Observable<ViewNotification[]> {
-    return this.http.get<ViewNotification[]>(`${this.apiUrl}/notifications`);
+  getUserNotifications(headers: HttpHeaders): Observable<ViewNotification[]> {
+    return this.http.get<ViewNotification[]>(`${this.apiUrl}/notifications`,{ headers });
   }
-  addUserNotification(viewedUsername: string): Observable<any> {
+  addUserNotification(viewedUsername: string,headers: HttpHeaders): Observable<any> {
     const url = `${this.apiUrl}/users/${viewedUsername}`;
-    return this.http.post(url, {});
+    return this.http.post(url, {},{ headers });
   }
 
 }

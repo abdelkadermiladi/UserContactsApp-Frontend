@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Contact } from '../../../contact.model';
 import { UserService } from '../user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-update-contact-dialog',
@@ -17,14 +19,19 @@ export class UpdateContactDialogComponent {
     public dialogRef: MatDialogRef<UpdateContactDialogComponent>,
     private userService: UserService,
     private snackBar: MatSnackBar,
+    private authService: AuthService,
+    
     @Inject(MAT_DIALOG_DATA) public data: { contact: Contact }
   ) {
     // Assign the contact data to the component property
     this.contact = { ...data.contact }; // Create a copy to avoid modifying the original data
   }
 
+  jwtToken = this.authService.getJwtToken();
+  headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtToken}`);
+
   onUpdateContact(): void {
-    this.userService.updateContact(this.contact).subscribe(
+    this.userService.updateContact(this.contact,this.headers).subscribe(
       response => {
         console.log(response);
         this.showSnackbar('Contact modifié avec succès!', 'success-snackbar');

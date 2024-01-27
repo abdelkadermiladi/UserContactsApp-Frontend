@@ -5,6 +5,8 @@ import { User } from '../../../user.model';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
 import { UserProfileDialogComponent } from '../user-profile-dialog/user-profile-dialog.component';
+import { AuthService } from '../auth.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-users-list',
@@ -25,14 +27,20 @@ export class UsersListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService:AuthService
   ) {}
+
+
+  jwtToken = this.authService.getJwtToken();
+  headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtToken}`);
+
 
   ngOnInit(): void {
     this.username = this.route.snapshot.queryParamMap.get('username') || '';
 
     // Fetch other users
-    this.userService.getAllUsers().subscribe(
+    this.userService.getAllUsers(this.headers).subscribe(
       users => {
         this.otherUsersNames = users.map(user => user.username);
         // Filter out the authenticated user's name
@@ -45,12 +53,12 @@ export class UsersListComponent implements OnInit {
   }
 
   viewUserProfile(otherUserName: string): void {
-    this.userService.getUserDetails(otherUserName).subscribe(
+    this.userService.getUserDetails(otherUserName,this.headers).subscribe(
       userDetails => {
         this.selectedUser = userDetails;
 
               // Add notification when user's profile is viewed
-              this.userService.addUserNotification(otherUserName).subscribe(
+              this.userService.addUserNotification(otherUserName,this.headers).subscribe(
                 response => {
                     console.log(response);
                     // Handle success if needed
@@ -77,7 +85,7 @@ export class UsersListComponent implements OnInit {
   onSearchInputChange(): void {
     // If search input is empty, show all users
     if (!this.searchInput.trim()) {
-      this.userService.getAllUsers().subscribe(
+      this.userService.getAllUsers(this.headers).subscribe(
         users => {
           this.otherUsersNames = users.map(user => user.username);
           // Filter out the authenticated user's name

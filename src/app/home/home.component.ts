@@ -10,6 +10,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpdateContactDialogComponent } from '../update-contact-dialog/update-contact-dialog.component';
 import { ViewNotification } from '../../../notification.model';
 import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
+import { AuthService } from '../auth.service';
+import { HttpHeaders } from '@angular/common/http';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -34,13 +37,22 @@ export class HomeComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private userService: UserService, 
     private router: Router,public dialog: MatDialog,private snackBar: MatSnackBar,
+    private authService:AuthService,
+    private location: Location
     ) {}
 
+
+    jwtToken = this.authService.getJwtToken();
+    headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtToken}`);
+
+
   ngOnInit(): void {
+
+
     // Fetch user information from the backend based on the username
     this.username = this.route.snapshot.queryParamMap.get('username') || '';
 
-    this.userService.getUserDetails(this.username).subscribe(
+    this.userService.getUserDetails(this.username,this.headers).subscribe(
       userDetails => {
         this.gender = userDetails.gender;
         this.age = userDetails.age;
@@ -53,7 +65,7 @@ export class HomeComponent implements OnInit {
     );
 
 
-    this.userService.listContacts().subscribe(
+    this.userService.listContacts(this.headers).subscribe(
       (contacts) => {
         this.contacts = contacts;
       },
@@ -63,7 +75,7 @@ export class HomeComponent implements OnInit {
     );
 
     // Fetch notifications when the component is initialized
-    this.userService.getUserNotifications().subscribe(
+    this.userService.getUserNotifications(this.headers).subscribe(
       (notifications) => {
           this.notifications = notifications;
       },
@@ -72,7 +84,8 @@ export class HomeComponent implements OnInit {
       }
     );
 
-  }
+
+}
 
     // Function to toggle the sort direction
     toggleSortDirection(): void {
@@ -98,7 +111,10 @@ export class HomeComponent implements OnInit {
 
     
   logout(): void {
+    this.authService.clearJwtToken();
+
     this.router.navigate(['/welcome']);
+    this.location.replaceState('/');
   }
 
   private showSnackbar(message: string, panelClass: string): void {
@@ -117,7 +133,7 @@ export class HomeComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.userService.removeContact(contact).subscribe(
+        this.userService.removeContact(contact,this.headers).subscribe(
           (response) => {
             if (response && response.message === 'Contact removed successfully') {
               console.log(response.message);
